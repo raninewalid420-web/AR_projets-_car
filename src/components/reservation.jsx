@@ -5,32 +5,73 @@ import { useAuth } from "../context/userContext";
 function Reservation({
   showReservationModal,
   setShowReservationModal,
-  setShowLoginModal,
   selectedCar,
-  handleReservationSubmit,
+  setShowPaymentModal,
+  setReservationData,
+  setTotalPrice,
 }) {
   const { isAuthenticated, user } = useAuth();
 
   const [reservationForm, setReservationForm] = useState({
     nom: user?.nom || "",
     prenom: user?.prenom || "",
-    telephone: user?.telephone || "",
+    telephone: user?.telephone || "", 
     dateDebut: "",
     dateFin: "",
     message: "",
   });
 
-  if (!showReservationModal || !selectedCar) 
-    return null;
+  const calculateTotalPrice = () => {
+    if (!reservationForm.dateDebut || !reservationForm.dateFin) return 0;
+
+    const start = new Date(reservationForm.dateDebut);
+    const end = new Date(reservationForm.dateFin);
+
+    const days = Math.ceil((end - start) / (1000 * 60 * 60 * 24));
+
+    if (days <= 0) return 0;
+
+    return days * selectedCar.pricePerDay;
+  };
+
+  //  Fonction pour gérer la soumission du formulaire
+  const handleReservationSubmit = (e) => {
+    e.preventDefault();
+
+    // Calculer le nombre de jours et le prix total
+    const start = new Date(reservationForm.dateDebut);
+    const end = new Date(reservationForm.dateFin);
+    const days = Math.ceil((end - start) / (1000 * 60 * 60 * 24));
+    const total = days * selectedCar.pricePerDay;
+
+    // Préparer les données de réservation
+    const reservationInfo = {
+      car: selectedCar,
+      user: user,
+      nom: reservationForm.nom,
+      prenom: reservationForm.prenom,
+      telephone: reservationForm.telephone,
+      dateDebut: reservationForm.dateDebut,
+      dateFin: reservationForm.dateFin,
+      message: reservationForm.message,
+      days: days,
+    };
+
+    setReservationData(reservationInfo);
+    setTotalPrice(total);
+
+    //paiement
+    setShowReservationModal(false);
+    setShowPaymentModal(true);
+  };
+
+  if (!showReservationModal || !selectedCar) return null;
 
   return (
     <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-6 overflow-y-auto">
       <div className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl max-w-2xl w-full border border-gray-700 relative my-8">
         <button
-          onClick={() => 
-            setShowReservationModal(false)
-
-          }
+          onClick={() => setShowReservationModal(false)}
           className="absolute top-4 right-4 text-gray-400 hover:text-white z-10"
         >
           <X className="w-6 h-6" />

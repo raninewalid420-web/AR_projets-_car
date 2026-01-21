@@ -12,9 +12,9 @@ import Paiement from "../components/paiement";
 import { useAuth } from "../context/userContext";
 
 export default function Cars() {
-  //auth verfication 
-  const { isAuthenticated,user } = useAuth();
-  console.log(isAuthenticated,user)
+  //auth verfication
+  const { isAuthenticated, user } = useAuth();
+  console.log(isAuthenticated, user);
   // Filtres
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedBrand, setSelectedBrand] = useState("all");
@@ -24,7 +24,7 @@ export default function Cars() {
   // Auth & réservation
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
-  
+
   // Paiement
   const [showPaymentModal, setShowPaymentModal] = useState(false);
   const [reservationData, setReservationData] = useState(null);
@@ -121,6 +121,8 @@ export default function Cars() {
         selectedCar={selectedCar}
         currentUser={currentUser}
         setShowPaymentModal={setShowPaymentModal}
+        setReservationData={setReservationData} 
+        setTotalPrice={setTotalPrice}
       />
       {/* paiement */}
       <Paiement
