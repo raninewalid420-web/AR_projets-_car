@@ -350,7 +350,7 @@ export default function Home() {
                     <div className="flex justify-between items-center">
                       <div>
                         <div className="text-2xl font-bold">
-                          €{car.price.toLocaleString()}
+                          {car.price.toLocaleString()} FDJ
                         </div>
                       </div>
                       <button className="px-4 py-2 bg-gradient-to-r from-red-600 to-orange-500 rounded-full text-sm font-semibold hover:shadow-lg hover:shadow-red-500/50 transition">

@@ -101,7 +101,7 @@ function Reservation({
                 {selectedCar.brand} • {selectedCar.year}
               </p>
               <p className="text-orange-500 font-semibold mt-1">
-                €{selectedCar.pricePerDay}/jour
+                FDJ {selectedCar.pricePerDay}/jour
               </p>
             </div>
           </div>

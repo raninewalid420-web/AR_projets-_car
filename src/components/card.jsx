@@ -115,7 +115,7 @@ function Card({filteredCars,handleReserveClick}) {
                     <div className="mb-3">
                       <div className="text-xs text-gray-400">Location</div>
                       <div className="text-sm font-semibold text-orange-500">
-                        €{car.pricePerDay}/jour
+                        {car.pricePerDay} FJ/jour
                       </div>
                     </div>
 
@@ -125,7 +125,7 @@ function Card({filteredCars,handleReserveClick}) {
                           Prix d'achat
                         </div>
                         <div className="text-2xl font-bold text-red-500">
-                          €{car.price.toLocaleString()}
+                          {car.price.toLocaleString()} FDJ
                         </div>
                       </div>
                       {car.available ? (
