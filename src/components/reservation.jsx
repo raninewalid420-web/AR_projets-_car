@@ -236,14 +236,14 @@ function Reservation({
                 <div className="flex justify-between items-center mb-2">
                   <span className="text-gray-400">Prix par jour</span>
                   <span className="font-semibold">
-                    €{selectedCar.pricePerDay}
+                    {selectedCar.pricePerDay} FDJ
                   </span>
                 </div>
                 <div className="border-t border-gray-700 pt-2 mt-2">
                   <div className="flex justify-between items-center">
                     <span className="text-lg font-bold">Prix Total</span>
                     <span className="text-2xl font-bold text-red-500">
-                      €{calculateTotalPrice().toLocaleString()}
+                      {calculateTotalPrice().toLocaleString()} FDJ
                     </span>
                   </div>
                 </div>

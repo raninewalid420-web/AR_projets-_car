@@ -9,6 +9,7 @@ import Card from "../components/card";
 import Connexion from "../components/login";
 import Reservation from "../components/reservation";
 import Paiement from "../components/paiement";
+import CarDetailsModal from "../components/detailsmodal";
 import { useAuth } from "../context/userContext";
 
 export default function Cars() {
@@ -35,6 +36,9 @@ export default function Cars() {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showReservationModal, setShowReservationModal] = useState(false);
   const [selectedCar, setSelectedCar] = useState(null);
+  // details
+  const [showDetailsModal, setShowDetailsModal] = useState(false);
+  const [detailsCar, setDetailsCar] = useState(null);
 
   // Filtres voitures
   const filteredCars = cars.filter((car) => {
@@ -50,6 +54,15 @@ export default function Cars() {
 
   const brands = [...new Set(cars.map((car) => car.brand))];
   const categories = [...new Set(cars.map((car) => car.category))];
+  // 👉 Ouvrir le modal Détails
+  const handleShowDetails = (car) => {
+    setDetailsCar(car);
+    setShowDetailsModal(true);
+  };
+  const handleReserveFromDetails = () => {
+    setShowDetailsModal(false);
+    handleReserveClick(detailsCar);
+  };
 
   //  "Réserver"
   const handleReserveClick = (car) => {
@@ -113,6 +126,12 @@ export default function Cars() {
         selectedCar={selectedCar}
         setShowReservationModal={setShowReservationModal}
       />
+      <CarDetailsModal
+        showModal={showDetailsModal}
+        setShowModal={setShowDetailsModal}
+        selectedCar={detailsCar}
+        onReserve={handleReserveFromDetails}
+      />
 
       {/* Réservation */}
       <Reservation
@@ -121,7 +140,7 @@ export default function Cars() {
         selectedCar={selectedCar}
         currentUser={currentUser}
         setShowPaymentModal={setShowPaymentModal}
-        setReservationData={setReservationData} 
+        setReservationData={setReservationData}
         setTotalPrice={setTotalPrice}
       />
       {/* paiement */}

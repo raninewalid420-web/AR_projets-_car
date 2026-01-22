@@ -120,7 +120,7 @@ function Paiement({
                 <div className="flex justify-between items-center">
                   <span className="text-lg font-semibold">Montant à payer</span>
                   <span className="text-3xl font-bold text-red-500">
-                    €{totalPrice?.toLocaleString() || 0}
+                    {totalPrice?.toLocaleString() || 0} FDJ
                   </span>
                 </div>
               </div>

@@ -353,7 +353,8 @@ export default function Home() {
                           {car.price.toLocaleString()} FDJ
                         </div>
                       </div>
-                      <button className="px-4 py-2 bg-gradient-to-r from-red-600 to-orange-500 rounded-full text-sm font-semibold hover:shadow-lg hover:shadow-red-500/50 transition">
+                      <button 
+                      className="px-4 py-2 bg-gradient-to-r from-red-600 to-orange-500 rounded-full text-sm font-semibold hover:shadow-lg hover:shadow-red-500/50 transition">
                         Details
                       </button>
                     </div>
@@ -443,7 +444,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-
+    
       {/* Footer */}
       <footer className="bg-gray-900 border-t border-gray-800 py-12 px-6">
         <div className="max-w-7xl mx-auto">
